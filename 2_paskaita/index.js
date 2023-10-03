@@ -1,36 +1,71 @@
-const express = require("express"); // importuojam express modulį (nepamirštam įsirašyti)
-const app = express(); // sukuriam express aplikaciją
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json()); // nurodom, kad bendraujam json formatu
+
 const port = 3000;
 
-const users = ["Alex", "Rose", "Megan"];
+const tasks = [{ id: 1, title: "Learn Node.js" }];
 
-// app.get(kelias, callback funkcija) - aprašomas API
-// kelias - kuriuo URL užeisime
-// callback funkcija - funkcija kuri bus įvykdita kai užeis į mūsų kelią
-app.get("/", (req, res) => {
-  res.send("Server is working"); // išsiunčiami duomenys kvietėjui
+// Search for tasks
+app.get("/tasks", (req, res) => {
+  res.send(tasks);
 });
 
-app.get("/users", (req, res) => {
-  res.send(users);
+// Get a specific task
+app.get("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  // 1 !== "1"
+  // +"1" => 1
+  // Number("1") => 1
+  const foundTask = tasks.find((task) => task.id === +id);
+  if (foundTask) {
+    res.send(foundTask);
+  } else {
+    res.status(404).send({ error: "Task not found" });
+  }
 });
 
-// :firstLetter - dinaminis route (dvitaškis nurodo, kad tai yra dinaminis)
-app.get("/users/:firstLetter", (req, res) => {
-  const { firstLetter } = req.params;
-  // /users/R => ["Rose"]
-  // /users/M => ["Megan"]
-  // /users/K => []
-
-  const foundUsers = users.filter((user) => user[0] === firstLetter);
-  res.send(foundUsers);
+// Create a new task
+app.post("/tasks", (req, res) => {
+  const { title } = req.body; // body kurį siunčia su requestu
+  const newTask = { id: Date.now(), title };
+  tasks.push(newTask);
+  res.send(newTask);
 });
 
-app.get("/fruits", (req, res) => {
-  res.send(["Apple", "Banana"]);
+// Update an existing task
+app.put("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  const task = req.body;
+
+  const foundIndex = tasks.findIndex((task) => task.id === +id);
+
+  if (foundIndex !== -1) {
+    const updatedTask = { id: +id, ...task };
+    tasks.splice(foundIndex, 1, updatedTask);
+    res.send(updatedTask);
+  } else {
+    res.status(404).send({ error: "Failed to update task" });
+  }
 });
 
-// paleidžiamas serveris, kuris klausosi mūsų nurodytu portu
+// Delete an existing task
+app.delete("/tasks/:id", (req, res) => {
+  const id = +req.params.id;
+
+  const foundIndex = tasks.findIndex((task) => task.id === id);
+  if (foundIndex !== -1) {
+    const deletingTask = tasks[foundIndex];
+    tasks.splice(foundIndex, 1);
+    res.send(deletingTask);
+  } else {
+    res.status(404).send({ error: "Failed to delete task" });
+  }
+});
+
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
