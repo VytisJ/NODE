@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Grazus title 1",
+    "id": "1",
+    "body": "Pirmas postas"
+  },
+  {
+    "title": "Grazus title 2",
+    "id": "2",
+    "body": "Antras postas"
+  },
+  {
+    "title": "Grazus title 3",
+    "id": "3",
+    "body": "Trecias postas"
+  }
+]
