@@ -24,7 +24,7 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    const fakeCar = { Name: "Petras", Surname: "Petraitis", Age: "33" };
+    const fakeCar = { Name: "Antanas", Surname: "Antanaitis", Age: "55" };
     const con = await client.connect();
     const data = await con
       .db("7_pamoka")
