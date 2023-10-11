@@ -14,7 +14,7 @@ const client = new MongoClient(URI); // sukuriam client instance
 app.get("/", async (req, res) => {
   try {
     const con = await client.connect(); // prisijungiam prie duomenų bazės (atidarau connection)
-    const data = await con.db("demo1").collection("cars").find().toArray(); // atlieku veiksmus duomenų bazėje
+    const data = await con.db("7_pamoka").collection("people").find().toArray(); // atlieku veiksmus duomenų bazėje
     await con.close(); // atsijungiu nuo duomenų bazės (uždarau connection)
     res.send(data);
   } catch (error) {
@@ -24,9 +24,12 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    const fakeCar = { brand: "AUDI", model: "A3" };
+    const fakeCar = { Name: "Petras", Surname: "Petraitis", Age: "33" };
     const con = await client.connect();
-    const data = await con.db("demo1").collection("cars").insertOne(fakeCar);
+    const data = await con
+      .db("7_pamoka")
+      .collection("people")
+      .insertOne(fakeCar);
     await con.close();
     res.send(data);
   } catch (error) {
