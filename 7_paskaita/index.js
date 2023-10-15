@@ -24,9 +24,9 @@ app.get("/", async (req, res) => {
       .aggregate([
         {
           $lookup: {
-            from: "pets",
-            localField: "_id",
-            foreignField: "ownerId",
+            from: "pets", // kita kolekcija
+            localField: "_id", // collection("kolekcija") fieldas per kurį jungiam
+            foreignField: "ownerId", // from kolekcijos laukas per kurį jungiam
             as: "gyvunai",
           },
         },
@@ -56,7 +56,7 @@ app.get("/pets", async (req, res) => {
           },
         },
         {
-          $unwind: "$owner",
+          $unwind: "$owner", // grąžina vietoj masyvo objektą, nes masyve tik vienas elementas
         },
       ])
       .toArray();
@@ -93,11 +93,105 @@ app.get("/pets/:id", async (req, res) => {
       ])
       .toArray();
     await con.close();
-    res.send(data[0]);
+    res.send(data[0]); // grazinu tik {} vietoj [{}]
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });
   }
+});
+
+app.delete("/pets/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const con = await client.connect();
+    const data = await con
+      .db("demo1")
+      .collection("pets")
+      .deleteOne({ _id: new ObjectId(id) });
+
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
+app.put("/pets/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatingPet = req.body;
+
+    if (updatingPet.ownerId) {
+      updatingPet.ownerId = new ObjectId(updatingPet.ownerId);
+    }
+
+    const filter = { _id: new ObjectId(id) }; // filtras kur sutinka id
+    const updateDoc = { $set: updatingPet }; // atnaujintas elementas
+
+    const con = await client.connect();
+    const data = await con
+      .db("demo1")
+      .collection("pets")
+      .updateOne(filter, updateDoc);
+
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
+app.post("/owners", async (req, res) => {
+  try {
+    const newOwner = req.body;
+    if (!newOwner.name || !newOwner.phone) {
+      return res.status(400).send({ error: "Missing data" });
+    }
+    const con = await client.connect();
+    const data = await con.db("demo1").collection("people").insertOne(newOwner);
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
+app.post("/pets", async (req, res) => {
+  try {
+    const newPet = req.body;
+    if (!newPet.type || !newPet.name || !newPet.ownerId) {
+      return res.status(400).send({ error: "Missing data" });
+    }
+
+    if (newPet.ownerId) {
+      newPet.ownerId = new ObjectId(newPet.ownerId);
+    }
+
+    const con = await client.connect();
+    const data = await con.db("demo1").collection("pets").insertOne(newPet);
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
+app.post("/register", (req, res) => {
+  // POST new user to the database
+  // req.body = {name: "Rokas", surname: "Andreikenas", email: "Rokas@gmail.com", password: "123456"}
+  // hash optional
+});
+
+app.post("/login", (req, res) => {
+  // POST with login values and checking if user exists
+  // req.body = {email: "rokas@gmail.com", "password": "123456"}
+  // check in database if user exists with that email and password
+  // if(exists) return res.send({message: 'success'})
+  // catch { res.status(403).send({message: "authorization failed"})}
 });
 
 app.listen(port, () => {
