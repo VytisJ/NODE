@@ -27,14 +27,30 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Get All Vytis cars
-app.get("/vytis", async (req, res) => {
+// Get All male
+app.get("/male", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con
       .db("renginys")
       .collection("dalyviai")
-      .find({ name: "Vytis" })
+      .find({ gender: "male" })
+      .toArray();
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+// Get All female
+app.get("/female", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("renginys")
+      .collection("dalyviai")
+      .find({ gender: "female" })
       .toArray();
     await con.close();
     res.send(data);

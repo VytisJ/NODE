@@ -14,8 +14,3 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
-.formkStyle {
-  color: red;
-  background-color: black;
-}
