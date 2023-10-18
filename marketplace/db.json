@@ -1,0 +1,46 @@
+{
+  "ads": [
+    {
+      "id": 1,
+      "title": "Vintage Wooden Chair",
+      "description": "A beautifully crafted vintage wooden chair in great condition. Perfect for any room setting.",
+      "imageUrl": "https://i.etsystatic.com/6130739/r/il/29548f/2960236785/il_fullxfull.2960236785_in4n.jpg",
+      "price": 50,
+      "userId": 1694710338964
+    },
+    {
+      "id": 2,
+      "title": "Brand New Mountain Bike",
+      "description": "A brand new mountain bike with 21-speed gear and dual disc brakes. Great for off-road adventures.",
+      "imageUrl": "https://www.switchbacktravel.com/sites/default/files/images/articles/Mountain%20Bike%20%28Santa%20Cruz%20Bronson%29.jpg",
+      "price": 300,
+      "userId": 1694710338964
+    },
+    {
+      "title": "Rokas",
+      "description": "test me",
+      "imageUrl": "https://images.fineartamerica.com/images-medium-large/euro-currency-symbol-in-focus-bjorn-holland.jpg",
+      "price": 10,
+      "userId": 1695049797854,
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1694710338964,
+      "email": "rokas@gmail.com",
+      "password": "rokas123"
+    },
+    {
+      "id": 1695049797854,
+      "email": "test@gmail.com",
+      "password": "testtest"
+    },
+    {
+      "email": "info@interfinance.net",
+      "password": "Vytis2121",
+      "repeatedPassword": "Vytis2121",
+      "id": 1695049797855
+    }
+  ]
+}
