@@ -1,0 +1,20 @@
+{
+  "name": "final_work_vj",
+  "version": "1.0.0",
+  "description": "Final Full-Stack with Node.js Projec",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Vytis Juozaitis",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.2.0",
+    "nodemon": "^3.0.1"
+  }
+}

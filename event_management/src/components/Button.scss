@@ -1,0 +1,28 @@
+$button-color-default: #0077b6;
+$button-color-hover: darken($button-color-default, 10%);
+$button-text-color: #ffffff;
+$button-padding: 10px 20px;
+$button-border-radius: 5px;
+$button-transition: background-color 0.3s ease;
+
+.button {
+  background-color: $button-color-default;
+  color: $button-text-color;
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  border: none;
+  cursor: pointer;
+  transition: $button-transition;
+  font-size: 16px;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background-color: $button-color-hover;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

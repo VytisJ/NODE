@@ -1,0 +1,15 @@
+.navigation {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 1px solid lightgray;
+  }
+
+  // &-logo {
+  // }
+
+  &-item {
+    margin-left: 1rem;
+  }
+}

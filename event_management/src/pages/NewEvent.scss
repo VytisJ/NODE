@@ -1,0 +1,18 @@
+.form {
+  width: 500px;
+  margin: 0 auto;
+
+  &-dates {
+    display: flex;
+    gap: 1rem;
+
+    input {
+      width: 100%;
+    }
+  }
+}
+
+.form > * {
+  margin-bottom: 1rem;
+  width: 100%;
+}

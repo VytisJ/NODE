@@ -1,0 +1,17 @@
+.event {
+  &-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 30px;
+  }
+
+  &-date {
+    margin-top: 1rem;
+    color: grey;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+}

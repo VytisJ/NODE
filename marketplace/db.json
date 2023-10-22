@@ -17,10 +17,10 @@
       "userId": 1694710338964
     },
     {
-      "title": "Rokas",
-      "description": "test me",
+      "title": "Home Bike",
+      "description": "",
       "imageUrl": "https://images.fineartamerica.com/images-medium-large/euro-currency-symbol-in-focus-bjorn-holland.jpg",
-      "price": 10,
+      "price": 0,
       "userId": 1695049797854,
       "id": 3
     }
@@ -35,12 +35,6 @@
       "id": 1695049797854,
       "email": "test@gmail.com",
       "password": "testtest"
-    },
-    {
-      "email": "info@interfinance.net",
-      "password": "Vytis2121",
-      "repeatedPassword": "Vytis2121",
-      "id": 1695049797855
     }
   ]
 }

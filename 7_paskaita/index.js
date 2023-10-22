@@ -180,18 +180,46 @@ app.post("/pets", async (req, res) => {
   }
 });
 
-app.post("/register", (req, res) => {
-  // POST new user to the database
-  // req.body = {name: "Rokas", surname: "Andreikenas", email: "Rokas@gmail.com", password: "123456"}
-  // hash optional
+app.post("/register", async (req, res) => {
+  try {
+    const newUser = req.body;
+
+    // Check if the user already exists with the given email (You would query your database here)
+    // For demonstration purposes, we'll assume the email is unique.
+    const userExists = users.some((user) => user.email === newUser.email);
+
+    if (userExists) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
+    }
+
+    // In a real application, you should hash the password before storing it in the database.
+    // You can use a library like 'bcrypt' for this purpose.
+    // For now, we assume the password is stored as-is (not recommended in practice).
+
+    users.push(newUser); // Add the new user to your database (in-memory array for demonstration).
+
+    res.json({ message: "Registration successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Registration failed" });
+  }
 });
 
 app.post("/login", (req, res) => {
-  // POST with login values and checking if user exists
-  // req.body = {email: "rokas@gmail.com", "password": "123456"}
-  // check in database if user exists with that email and password
-  // if(exists) return res.send({message: 'success'})
-  // catch { res.status(403).send({message: "authorization failed"})}
+  const { email, password } = req.body;
+
+  // Search for the user with the provided email (You would query your database here)
+  const user = users.find((user) => user.email === email);
+
+  if (!user || user.password !== password) {
+    // In a real application, you should hash and compare the passwords securely.
+    // If the user doesn't exist or the password is incorrect, return an error.
+    return res.status(403).json({ message: "Authorization failed" });
+  }
+
+  res.json({ message: "Login successful" });
 });
 
 app.listen(port, () => {

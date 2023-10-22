@@ -1,0 +1,25 @@
+$border-color-default: #ccc;
+$border-color-focus: #0077b6;
+$placeholder-color: #888;
+
+.input {
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 2px solid $border-color-default;
+  outline: none;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $border-color-focus;
+  }
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
