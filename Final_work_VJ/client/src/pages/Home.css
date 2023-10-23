@@ -1,5 +1,12 @@
-*{padding: 0; margin: 0; box-sizing: border-box;}
-body{height: 900px;}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 900px;
+}
 
 header {
   text-align: center;
@@ -18,58 +25,59 @@ header .headerStyle {
   padding: 20px;
   color: #FFF;
   text-shadow: 1px 1px 1px #333;
-  background: linear-gradient(135deg, #9f05ff69 10%, #fd5e086b 100%);
+  background: linear-gradient(135deg, #9f05ff69 10%, #e74c3c 100%);
 }
 
 h1 {
   font-family: 'Open Sans', sans-serif;
-  font-size: 36px; 
-  margin-bottom: 20px; 
-  text-transform: uppercase; 
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
-
 
 button {
   border: none;
   outline: none;
-  padding: 15px 30px; 
+  padding: 15px 30px;
   border-radius: 10px;
   color: #FFF;
-  background: #e74c3c; 
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3); 
+  background: #e74c3c;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
   cursor: pointer;
-  background: #ff6f42; 
+  background: #ff6f42;
 }
 
 .formStyle {
   margin: 5rem auto;
   background-color: rgba(255, 255, 255, 0.7);
-  max-width: 400px; 
-  padding: 20px; 
-  border-radius: 10px; 
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .formFieldStyle {
   display: block;
-  width: 100%; 
-  margin: 10px 0; 
+  width: 100%;
+  margin: 10px 0;
   padding: 5px;
 }
 
-h1 {
-  color: white;
-}
-
-form h2 {
-  color: #e74c3c;
+.formFieldStyle:focus {
+  border: 1px solid #e74c3c;
 }
 
 .formButton {
   margin-top: 0.7rem;
   margin-bottom: 0.7rem;
+  padding: 10px 20px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .error {
@@ -84,29 +92,44 @@ table {
   font-family: 'Open Sans', sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin-top: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-td,
-th {
+td, th {
   border: 1px solid #e74c3c;
   text-align: left;
-  padding: 8px;
+  padding: 10px;
 }
-tr{
-  background-color: rgba(255, 255, 255, 0.7);
+
+th {
+  background-color: #e74c3c;
+  color: #fff;
 }
+
+tr {
+  background-color: #f7f7f7;
+}
+
 tr:nth-child(even) {
-  background-color: rgba(255, 174, 174, 0.7);
+  background-color: #fff;
 }
 
 .eventHeader {
   text-align: center;
   margin-bottom: 0;
-  
 }
 
 .eventHeader h1 {
-  color: rgba(255, 255, 255, 1);
-  background-color: rgba(255, 174, 174, 0.7);
+  color: #fff;
+  background-color: #e74c3c;
   max-width: auto;
+  border-bottom-style: ridge;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
 }

@@ -13,7 +13,6 @@ const client = new MongoClient(URI);
 const dalyviaiCollection = client.db("renginys").collection("dalyviai");
 const registeredUsers = [];
 
-// Register a user
 app.post("/register", (req, res) => {
   const { email, password } = req.body;
 
@@ -21,7 +20,6 @@ app.post("/register", (req, res) => {
     return res.status(400).send({ error: "Missing data" });
   }
 
-  // Simulate registration by adding the user to the local array
   const newUser = { email, password };
   registeredUsers.push(newUser);
 
@@ -103,6 +101,29 @@ app.post("/", async (req, res) => {
     const data = await dalyviaiCollection.insertOne(newDalyvis);
     res.send(data);
   } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+app.put("/dalyviai/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedDalyvis = req.body;
+
+    delete updatedDalyvis._id;
+
+    const result = await dalyviaiCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updatedDalyvis }
+    );
+
+    if (result.modifiedCount > 0) {
+      res.send({ message: "Record updated successfully" });
+    } else {
+      res.status(404).send({ error: "Record not found" });
+    }
+  } catch (error) {
+    console.log(error);
     res.status(500).send({ error });
   }
 });
